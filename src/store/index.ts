@@ -4,11 +4,13 @@ import type { GameSession, GameStats, StreakData, GameId } from '../types'
 
 interface AppState {
   playerName: string
+  hasSeenWelcome: boolean
   streak: StreakData
   games: Partial<Record<GameId, GameStats>>
   totalGamesPlayed: number
 
   setPlayerName: (name: string) => void
+  completeWelcome: (name: string) => void
   recordSession: (gameId: GameId, session: Omit<GameSession, 'id' | 'date'>) => void
   updateStreak: () => void
   getGameStats: (gameId: GameId) => GameStats
@@ -23,12 +25,14 @@ const defaultStats: GameStats = {
 export const useStore = create<AppState>()(
   persist(
     (set, get) => ({
-      playerName: 'Elyes',
+      playerName: '',
+      hasSeenWelcome: false,
       streak: { current: 0, longest: 0, lastPlayDate: '' },
       games: {},
       totalGamesPlayed: 0,
 
       setPlayerName: (name) => set({ playerName: name }),
+      completeWelcome: (name) => set({ playerName: name.trim() || 'Champion', hasSeenWelcome: true }),
 
       recordSession: (gameId, sessionData) => {
         const session: GameSession = {
