@@ -17,7 +17,7 @@ export default function GameResult({ result, personalBest, gameId, onPlayAgain }
 
   return (
     <motion.div
-      className="flex flex-col items-center justify-center min-h-[80vh] px-6 py-8"
+      className="flex flex-col items-center justify-center flex-1 px-6 py-8"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}

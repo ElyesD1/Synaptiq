@@ -42,7 +42,7 @@ export default function GamePage() {
 
   if (!meta || !GameComponent) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[80vh] px-6 gap-4">
+      <div className="flex flex-col items-center justify-center flex-1 px-6 gap-4">
         <div className="text-2xl font-bold text-gray-900">Game not found</div>
         <button onClick={() => navigate('/games')} className="text-blue-500 font-medium">
           Back to Games
@@ -63,7 +63,7 @@ export default function GamePage() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col">
+    <div className="h-dvh flex flex-col overflow-hidden">
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2 bg-white/90 backdrop-blur-sm sticky top-0 z-10 border-b border-gray-50">
         <button
@@ -91,7 +91,7 @@ export default function GamePage() {
       {/* Game */}
       <motion.div
         key={gameKey}
-        className="flex-1"
+        className="flex-1 min-h-0 overflow-y-auto flex flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}

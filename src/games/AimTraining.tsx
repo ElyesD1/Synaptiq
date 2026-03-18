@@ -28,8 +28,8 @@ function randBetween(a: number, b: number) {
 }
 
 function genTarget(score: number, prevX?: number, prevY?: number): Target {
-  // Size shrinks with score: 70 → 42px
-  const size = Math.max(42, 70 - score * 2)
+  // Size shrinks with score: 76 → 60px (stays large enough to tap comfortably)
+  const size = Math.max(60, 76 - score * 1.2)
   let x: number, y: number
   // Avoid spawning too close to previous target
   do {
@@ -280,7 +280,7 @@ export default function AimTraining({ onComplete }: Props) {
   if (phase === 'intro') {
     return (
       <motion.div
-        className="flex flex-col items-center justify-center min-h-[80vh] px-6 gap-6"
+        className="flex flex-col items-center justify-center flex-1 px-6 gap-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -320,7 +320,7 @@ export default function AimTraining({ onComplete }: Props) {
   const avgRt = rts.length > 0 ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0
 
   return (
-    <div className="flex flex-col px-4 pt-4 gap-3" style={{ height: '100%' }}>
+    <div className="flex flex-col px-4 pt-4 gap-3 flex-1">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="text-center">
@@ -347,7 +347,7 @@ export default function AimTraining({ onComplete }: Props) {
       <div
         className="relative flex-1 rounded-3xl overflow-hidden"
         style={{
-          minHeight: 360,
+          minHeight: 520,
           backgroundColor: '#0d0d14',
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px)',
           backgroundSize: '28px 28px',
@@ -359,8 +359,8 @@ export default function AimTraining({ onComplete }: Props) {
               key={target.id}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.3, opacity: 0 }}
-              transition={{ duration: 0.08 }}
+              exit={{ scale: 0.4, opacity: 0, transition: { duration: 0.1 } }}
+              transition={{ type: 'spring', stiffness: 700, damping: 22, mass: 0.4 }}
               onAnimationStart={() => { targetSpawnTimeRef.current = performance.now() }}
               onPointerDown={handleTap}
               className="absolute touch-manipulation select-none focus:outline-none"
@@ -369,7 +369,8 @@ export default function AimTraining({ onComplete }: Props) {
                 top: `${target.y}%`,
                 width: target.size,
                 height: target.size,
-                transform: 'translate(-50%, -50%)',
+                marginLeft: -target.size / 2,
+                marginTop: -target.size / 2,
               }}
             >
               {/* Countdown ring */}

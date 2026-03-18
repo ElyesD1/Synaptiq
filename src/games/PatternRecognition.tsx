@@ -221,7 +221,7 @@ export default function PatternRecognition({ onComplete }: Props) {
   if (phase === 'intro') {
     return (
       <motion.div
-        className="flex flex-col items-center justify-center min-h-[80vh] px-6 gap-8"
+        className="flex flex-col items-center justify-center flex-1 px-6 gap-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -268,7 +268,7 @@ export default function PatternRecognition({ onComplete }: Props) {
   }[puzzle.difficulty]
 
   return (
-    <div className="flex flex-col px-4 pt-6 gap-5 min-h-[80vh]">
+    <div className="flex flex-col px-4 pt-6 gap-5 flex-1">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">

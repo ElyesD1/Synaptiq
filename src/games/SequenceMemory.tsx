@@ -195,7 +195,7 @@ export default function SequenceMemory({ onComplete }: Props) {
   if (phase === 'intro') {
     return (
       <motion.div
-        className="flex flex-col items-center justify-center min-h-[80vh] px-6 gap-8"
+        className="flex flex-col items-center justify-center flex-1 px-6 gap-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
@@ -234,7 +234,7 @@ export default function SequenceMemory({ onComplete }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center px-4 pt-8 gap-8 min-h-[80vh]">
+    <div className="flex flex-col items-center px-4 pt-8 gap-8 flex-1">
       {/* Header */}
       <div className="flex justify-between items-center w-full">
         <div className="text-sm font-semibold text-gray-500 uppercase tracking-widest">

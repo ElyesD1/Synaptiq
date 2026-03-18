@@ -236,7 +236,7 @@ export default function MemoryMatrix({ onComplete }: Props) {
   if (phase === 'ready') {
     return (
       <motion.div
-        className="flex flex-col items-center justify-center min-h-[80vh] px-6 gap-8"
+        className="flex flex-col items-center justify-center flex-1 px-6 gap-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
