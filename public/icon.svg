@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#080818"/>
+      <stop offset="55%"  stop-color="#13082a"/>
+      <stop offset="100%" stop-color="#0c1022"/>
+    </linearGradient>
+
+    <!-- Atmospheric glows -->
+    <radialGradient id="atmPurple" cx="512" cy="410" r="470" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#4F46E5" stop-opacity="0.26"/>
+      <stop offset="65%"  stop-color="#4F46E5" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#4F46E5" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="atmOrange" cx="512" cy="570" r="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#F97316" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="atmTeal" cx="512" cy="220" r="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#0D9488" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0D9488" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Clip to rounded square -->
+    <clipPath id="clip">
+      <rect width="1024" height="1024" rx="224"/>
+    </clipPath>
+
+    <!-- Glow filters -->
+    <filter id="gO" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"  result="b2"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="gT" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6"  result="b2"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="gP" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5"  result="b2"/>
+      <feMerge>
+        <feMergeNode in="b1"/>
+        <feMergeNode in="b2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g clip-path="url(#clip)">
+    <!-- ── Background ─────────────────────────────────── -->
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <rect width="1024" height="1024" fill="url(#atmPurple)"/>
+    <rect width="1024" height="1024" fill="url(#atmOrange)"/>
+    <rect width="1024" height="1024" fill="url(#atmTeal)"/>
+
+    <!-- ── Brain-ring outline ─────────────────────────── -->
+    <ellipse cx="512" cy="445" rx="310" ry="248"
+             fill="none" stroke="white" stroke-opacity="0.07" stroke-width="2.5"/>
+
+    <!-- ── Neural connections ─────────────────────────── -->
+    <!--
+      Node centers:
+        N1 (512, 210) — orange crown
+        N2 (255, 355) — teal left
+        N3 (769, 355) — teal right
+        N4 (398, 448) — purple left
+        N5 (626, 448) — purple right
+        N6 (512, 552) — orange main synapse
+        N7 (512, 665) — dark stem
+    -->
+    <g stroke="#0D9488" stroke-linecap="round" fill="none">
+      <!-- Crown → outer nodes -->
+      <line x1="512" y1="210" x2="255" y2="355" stroke-opacity="0.55" stroke-width="2.5"/>
+      <line x1="512" y1="210" x2="769" y2="355" stroke-opacity="0.55" stroke-width="2.5"/>
+      <!-- Crown → inner nodes -->
+      <line x1="512" y1="210" x2="398" y2="448" stroke-opacity="0.38" stroke-width="1.8"/>
+      <line x1="512" y1="210" x2="626" y2="448" stroke-opacity="0.38" stroke-width="1.8"/>
+      <!-- Horizontal belt: outer left → outer right -->
+      <line x1="255" y1="355" x2="769" y2="355" stroke-opacity="0.42" stroke-width="2"/>
+      <!-- Outer → inner same side -->
+      <line x1="255" y1="355" x2="398" y2="448" stroke-opacity="0.4"  stroke-width="1.8"/>
+      <line x1="769" y1="355" x2="626" y2="448" stroke-opacity="0.4"  stroke-width="1.8"/>
+      <!-- Horizontal belt: inner left → inner right -->
+      <line x1="398" y1="448" x2="626" y2="448" stroke-opacity="0.36" stroke-width="1.8"/>
+      <!-- Inner → main synapse -->
+      <line x1="398" y1="448" x2="512" y2="552" stroke-opacity="0.45" stroke-width="2"/>
+      <line x1="626" y1="448" x2="512" y2="552" stroke-opacity="0.45" stroke-width="2"/>
+      <!-- Outer → main synapse (long diagonals) -->
+      <line x1="255" y1="355" x2="512" y2="552" stroke-opacity="0.22" stroke-width="1.4"/>
+      <line x1="769" y1="355" x2="512" y2="552" stroke-opacity="0.22" stroke-width="1.4"/>
+      <!-- Stem -->
+      <line x1="512" y1="552" x2="512" y2="665" stroke="#4B5563" stroke-opacity="0.35" stroke-width="2"/>
+    </g>
+
+    <!-- ── Nodes ──────────────────────────────────────── -->
+
+    <!-- N2 — Teal left -->
+    <circle cx="255" cy="355" r="32" fill="#0D9488" opacity="0.18" filter="url(#gT)"/>
+    <circle cx="255" cy="355" r="19" fill="#14B8A6" filter="url(#gT)"/>
+    <circle cx="248" cy="348" r="8"  fill="white"   opacity="0.3"/>
+
+    <!-- N3 — Teal right -->
+    <circle cx="769" cy="355" r="32" fill="#0D9488" opacity="0.18" filter="url(#gT)"/>
+    <circle cx="769" cy="355" r="19" fill="#14B8A6" filter="url(#gT)"/>
+    <circle cx="762" cy="348" r="8"  fill="white"   opacity="0.3"/>
+
+    <!-- N4 — Purple left -->
+    <circle cx="398" cy="448" r="26" fill="#8B5CF6" opacity="0.18" filter="url(#gP)"/>
+    <circle cx="398" cy="448" r="16" fill="#A78BFA" filter="url(#gP)"/>
+    <circle cx="392" cy="442" r="6"  fill="white"   opacity="0.25"/>
+
+    <!-- N5 — Purple right -->
+    <circle cx="626" cy="448" r="26" fill="#8B5CF6" opacity="0.18" filter="url(#gP)"/>
+    <circle cx="626" cy="448" r="16" fill="#A78BFA" filter="url(#gP)"/>
+    <circle cx="620" cy="442" r="6"  fill="white"   opacity="0.25"/>
+
+    <!-- N1 — Orange crown -->
+    <circle cx="512" cy="210" r="40" fill="#F97316" opacity="0.18" filter="url(#gO)"/>
+    <circle cx="512" cy="210" r="25" fill="#FB923C" filter="url(#gO)"/>
+    <circle cx="503" cy="201" r="11" fill="white"   opacity="0.32"/>
+
+    <!-- N6 — Orange main synapse (largest, most prominent) -->
+    <circle cx="512" cy="552" r="52" fill="#F97316" opacity="0.16" filter="url(#gO)"/>
+    <circle cx="512" cy="552" r="32" fill="#FB923C" filter="url(#gO)"/>
+    <circle cx="501" cy="541" r="14" fill="white"   opacity="0.32"/>
+
+    <!-- N7 — Stem -->
+    <circle cx="512" cy="665" r="13" fill="#374151" opacity="0.85"/>
+    <circle cx="512" cy="665" r="5"  fill="#6B7280" opacity="0.6"/>
+  </g>
+</svg>

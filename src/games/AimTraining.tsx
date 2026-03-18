@@ -186,6 +186,7 @@ export default function AimTraining({ onComplete }: Props) {
   const missesRef = useRef(0)
   const rtsRef = useRef<number[]>([])
   const prevPosRef = useRef<{ x: number; y: number }>()
+  const targetSpawnTimeRef = useRef(0)
   const personalBest = useStore((s) => s.getGameStats('aim-training').personalBest)
 
   const { seconds, start: startTimer } = useTimer(GAME_DURATION, () => {
@@ -233,7 +234,7 @@ export default function AimTraining({ onComplete }: Props) {
       e.stopPropagation()
       if (!target) return
       clearTimeout(missTimeoutRef.current)
-      const rt = Math.round(performance.now() - target.spawnTime)
+      const rt = Math.round(performance.now() - targetSpawnTimeRef.current)
       scoreRef.current++
       rtsRef.current = [...rtsRef.current, rt]
       setScore(scoreRef.current)
@@ -344,8 +345,13 @@ export default function AimTraining({ onComplete }: Props) {
 
       {/* Play area */}
       <div
-        className="relative flex-1 rounded-3xl bg-gray-50 overflow-hidden"
-        style={{ minHeight: 360 }}
+        className="relative flex-1 rounded-3xl overflow-hidden"
+        style={{
+          minHeight: 360,
+          backgroundColor: '#0d0d14',
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }}
       >
         <AnimatePresence>
           {target && (
@@ -354,7 +360,8 @@ export default function AimTraining({ onComplete }: Props) {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.3, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+              transition={{ duration: 0.08 }}
+              onAnimationStart={() => { targetSpawnTimeRef.current = performance.now() }}
               onPointerDown={handleTap}
               className="absolute touch-manipulation select-none focus:outline-none"
               style={{
@@ -385,8 +392,8 @@ export default function AimTraining({ onComplete }: Props) {
                 />
               </svg>
               <div
-                className="absolute rounded-full bg-orange-400 active:bg-orange-500"
-                style={{ inset: 6 }}
+                className="absolute rounded-full bg-orange-500 active:bg-orange-400"
+                style={{ inset: 6, boxShadow: '0 0 12px rgba(249,115,22,0.6)' }}
               />
             </motion.button>
           )}
@@ -394,7 +401,9 @@ export default function AimTraining({ onComplete }: Props) {
 
         {!target && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-2 h-2 rounded-full bg-gray-300" />
+            <div className="w-px h-6 bg-white/20 absolute" />
+            <div className="w-6 h-px bg-white/20 absolute" />
+            <div className="w-2 h-2 rounded-full bg-white/30" />
           </div>
         )}
       </div>
