@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Info } from 'lucide-react'
 import { useStore } from '../store'
@@ -37,6 +37,8 @@ export default function GamePage() {
   const recordSession = useStore((s) => s.recordSession)
   const [gameKey, setGameKey] = useState(0) // increment to force remount
 
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+
   const meta = getGameMeta(id ?? '')
   const GameComponent = id ? GAME_MAP[id as GameId] : null
 
@@ -63,7 +65,7 @@ export default function GamePage() {
   }
 
   return (
-    <div className="h-dvh flex flex-col overflow-hidden">
+    <div className="min-h-dvh flex flex-col">
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 pt-4 pb-2 bg-white/90 backdrop-blur-sm sticky top-0 z-10 border-b border-gray-50">
         <button
@@ -91,7 +93,7 @@ export default function GamePage() {
       {/* Game */}
       <motion.div
         key={gameKey}
-        className="flex-1 min-h-0 overflow-y-auto flex flex-col"
+        className="flex-1 flex flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
