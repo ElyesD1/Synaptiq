@@ -280,7 +280,7 @@ export default function AimTraining({ onComplete }: Props) {
   if (phase === 'intro') {
     return (
       <motion.div
-        className="flex flex-col items-center justify-center flex-1 px-6 gap-6"
+        className="flex flex-col items-center flex-1 px-6 py-8 gap-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
